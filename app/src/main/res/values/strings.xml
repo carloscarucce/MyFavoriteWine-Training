@@ -9,4 +9,5 @@
     <string name="label_senha">Senha</string>
     <string name="label_button_login">Login</string>
     <string name="label_textview_register">REGISTRAR</string>
+    <string name="textview_label_register_info_header">Entre com seus dados:</string>
 </resources>

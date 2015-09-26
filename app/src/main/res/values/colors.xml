@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="layer_opacity_login_color" >#B2180A30</color>
+    <color name="material_black" >#000000</color>
+    <color name="material_purple" >#2E145A</color>
+    <color name="material_white_purple" >#4D289A</color>
+    <color name="material_green" >#50E3C2</color>
+    <color name="material_white_green" >#5FFFD0</color>
+    <color name="material_dark_grey" >#464646</color>
+    <color name="material_grey" >#696969</color>
+    <color name="material_white" >#FFFFFF</color>
+    <color name="material_transparent">@android:color/transparent</color>
+
 </resources>
