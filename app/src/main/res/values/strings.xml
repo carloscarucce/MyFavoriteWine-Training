@@ -10,4 +10,9 @@
     <string name="label_button_login">Login</string>
     <string name="label_textview_register">REGISTRAR</string>
     <string name="textview_label_register_info_header">Entre com seus dados:</string>
+    <string name="toolbar_label_title_register">Registrar</string>
+    <string name="label_error_message_field_required">campo obrigatório</string>
+    <string name="label_error_message_invalid_mail">email inválido</string>
+    <string name="label_date_birthday">Data de nascimento</string>
+
 </resources>
