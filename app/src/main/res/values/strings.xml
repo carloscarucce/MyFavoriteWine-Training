@@ -14,5 +14,6 @@
     <string name="label_error_message_field_required">campo obrigatório</string>
     <string name="label_error_message_invalid_mail">email inválido</string>
     <string name="label_date_birthday">Data de nascimento</string>
+    <string name="label_error_message_connection_fail">Não foi possivel se conectar ao servidor. Sinto muito</string>
 
 </resources>

@@ -23,8 +23,12 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.DialogInterface.OnDismissListener;
 
 import com.sample.gpd.myfavoritewine.R;
+import com.sample.gpd.myfavoritewine.service.listener.OperationalListener;
+import com.sample.gpd.myfavoritewine.service.manager.UserManager;
+import com.sample.gpd.myfavoritewine.service.model.*;
 import com.sample.gpd.myfavoritewine.ui.activity.RegisterActivity;
 import com.sample.gpd.myfavoritewine.ui.widget.custom.DatePickerDialog;
+import com.sample.gpd.myfavoritewine.service.model.Error;
 
 /**
  * Created by kauesantoja on 03/10/2015.
@@ -120,7 +124,29 @@ public class RegisterFragment extends Fragment{
             resultForms = isRequiredField(mEditTextName);
             resultForms = resultForms && isValidMail(mEditTextEmail);
             if(resultForms){
-                Toast.makeText(mRegisterActivity,"Passou",Toast.LENGTH_SHORT).show();
+                final User user = new User();
+                user.name = mEditTextName.getText().toString();
+                user.mail = mEditTextEmail.getText().toString();
+
+                user.gender = (mRadioGroupGender.getCheckedRadioButtonId() == R.id.radiobutton_male)? "Masculino" : "Feminino";
+
+                user.birthDate = mEditTextBirthday.getText().toString();
+                user.password = mEditTextPassword.getText().toString();
+                user.receiverMail = mCheckBoxReceivePromotional.isChecked() ? "Sim" : "Não";
+                UserManager userManager = new UserManager(mRegisterActivity);
+                userManager.register(user, new OperationalListener<UserResponse>() {
+                    @Override
+                    public void onOperationalSuccess(UserResponse userResponse) {
+                        Toast.makeText(mRegisterActivity, "SUCESSO", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onOperationalError(UserResponse userResponse, Error error) {
+                        Toast.makeText(mRegisterActivity, error.errorMessage, Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
         }
     };
