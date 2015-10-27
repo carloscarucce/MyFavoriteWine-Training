@@ -2,6 +2,11 @@ package com.sample.gpd.myfavoritewine.service.util;
 
 import android.util.Log;
 
+import com.sample.gpd.myfavoritewine.service.model.User;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +23,13 @@ public class MongolabManager {
     private static final String TAG = MongolabManager.class.getName();
     public static final String TYPE_METHOD_POST = "POST";
     public static final String TYPE_METHOD_GET = "GET";
+
+    public static final String API_KEY = "?apiKey=vCGIaC1cfLndci-iH7wxrgvX1q_DO73v";
+    public static final String SERVER_URL = "https://api.mongolab.com/api/1/databases";
+    public static final String SERVER_BASENAME = "/myfavoritewine";
+    public static final String COLLECTIONS = "/collections";
+    public static final String COLLECTION_USER = "/user";
+    public static final String COLLECTION_WINE = "/wine";
 
     public String doRequest(String url, String typeMethod, String params) {
 
@@ -64,6 +76,31 @@ public class MongolabManager {
 
         return result;
 
+    }
+
+    public User register(User user){
+        User result = null;
+
+        JSONObject document = new JSONObject();
+        try{
+            String childRequest = "document";
+            document.put(childRequest, user.toJson());
+            StringBuffer url = new StringBuffer();
+            url.append(SERVER_URL);
+            url.append(SERVER_BASENAME);
+            url.append(COLLECTIONS);
+            url.append(COLLECTION_USER);
+            url.append(API_KEY);
+            String response = doRequest(url.toString(),TYPE_METHOD_POST, document.toString());
+            JSONObject jsonObjectDocument = new JSONObject(response);
+            JSONObject jsonObject = jsonObjectDocument.getJSONObject(childRequest);
+            result = new User(jsonObject);
+
+        }catch (JSONException je){
+            je.printStackTrace();
+        }
+
+        return result;
     }
 
 }
